@@ -1,0 +1,13 @@
+node_modules/
+.env
+dist/
+build/
+*.log
+*.db
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
