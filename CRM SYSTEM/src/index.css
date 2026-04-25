@@ -132,6 +132,10 @@ body {
   filter: drop-shadow(0 0 5px var(--primary));
 }
 
+.mobile-header {
+  display: none;
+}
+
 /* Main Content */
 .main-content {
   flex: 1;
@@ -198,6 +202,19 @@ label {
   font-weight: 500;
   color: var(--text-muted);
   margin-bottom: 0.6rem;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+@media (max-width: 600px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
 }
 
 input, textarea, select {
@@ -375,4 +392,113 @@ tr:hover td {
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: #ffffff; /* Fallback for browsers that don't support text clipping */
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 1024px) {
+  .sidebar {
+    width: 240px;
+  }
+  
+  .main-content {
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .app-container {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: fixed;
+    top: 0;
+    left: -100%;
+    transition: var(--transition);
+    padding: 1.5rem;
+    box-shadow: 10px 0 30px rgba(0,0,0,0.5);
+  }
+
+  .sidebar.open {
+    left: 0;
+  }
+
+  .main-content {
+    padding: 5rem 1rem 2rem; /* Extra top padding for mobile header */
+    margin-top: 0;
+  }
+
+  .mobile-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+    background: var(--glass-heavy);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+  }
+
+  .menu-toggle {
+    background: transparent;
+    padding: 0.5rem;
+    font-size: 1.5rem;
+    border: none;
+    box-shadow: none;
+  }
+
+  .menu-toggle:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .page-title {
+    font-size: 1.75rem;
+  }
+
+  .card {
+    padding: 1.5rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .chat-window {
+    height: calc(100vh - 180px);
+  }
+
+  .message {
+    max-width: 90%;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-title {
+    font-size: 1.5rem;
+  }
+  
+  .logo {
+    font-size: 1.25rem;
+  }
+
+  button {
+    padding: 0.8rem 1.2rem;
+    width: 100%;
+  }
+
+  .chat-input-area {
+    padding: 1rem;
+    flex-direction: column;
+  }
+
+  .chat-input-area button {
+    width: 100%;
+  }
 }

@@ -29,7 +29,7 @@ const ChatUI = () => {
   };
 
   return (
-    <div className="card" style={{height: '500px', display: 'flex', flexDirection: 'column'}}>
+    <div className="card chat-window">
       <h3 style={{fontSize: '1.1rem', marginBottom: '0.5rem'}}>AI Assistant</h3>
       <p style={{color: 'var(--text-muted)', fontSize: '0.8rem', marginBottom: '1rem'}}>
         Log interaction via chat

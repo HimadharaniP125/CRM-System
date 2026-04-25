@@ -30,7 +30,7 @@ const FormUI = () => {
     <div className="card">
       <h3 style={{marginBottom: '1.5rem', opacity: 0.8}}>Interaction Details</h3>
       <form onSubmit={handleSubmit}>
-        <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem'}}>
+        <div className="form-grid">
           <div className="form-group">
             <label>HCP Name</label>
             <input 
@@ -55,7 +55,7 @@ const FormUI = () => {
           </div>
         </div>
 
-        <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem'}}>
+        <div className="form-grid">
           <div className="form-group">
             <label>Date</label>
             <input 

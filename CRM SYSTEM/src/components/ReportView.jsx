@@ -38,7 +38,7 @@ const ReportView = () => {
         </div>
       </div>
 
-      <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '2.5rem', marginTop: '2rem'}}>
+      <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2.5rem', marginTop: '2rem'}}>
         <div className="card" style={{background: 'rgba(255,255,255,0.02)'}}>
           <h3 style={{borderBottom: '1px solid var(--border)', paddingBottom: '1rem', marginBottom: '1rem'}}>Activity by Product</h3>
           {report.byProduct.length === 0 ? <p style={{color: 'var(--text-muted)'}}>No data yet.</p> : report.byProduct.map(p => (
