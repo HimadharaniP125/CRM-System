@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchInteractions, deleteInteraction } from '../store';
-import { FaTrash, FaEdit } from 'react-icons/fa';
+import { FaTrash } from 'react-icons/fa';
 
 const Dashboard = () => {
   const dispatch = useDispatch();

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { chatWithAI, addMessage, fetchInteractions } from '../store';
 import { FaPaperPlane } from 'react-icons/fa';

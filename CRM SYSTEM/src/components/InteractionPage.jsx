@@ -1,4 +1,3 @@
-import React from 'react';
 import FormUI from './FormUI';
 import ChatUI from './ChatUI';
 

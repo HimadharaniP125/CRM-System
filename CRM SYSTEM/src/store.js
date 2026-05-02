@@ -1,7 +1,7 @@
 import { configureStore, createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const API_BASE = 'http://localhost:8000/api';
+export const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8000/api';
 
 // Async Thunks
 export const fetchInteractions = createAsyncThunk('crm/fetchInteractions', async () => {
@@ -42,7 +42,7 @@ const crmSlice = createSlice({
       .addCase(fetchInteractions.fulfilled, (state, action) => {
         state.interactions = action.payload;
       })
-      .addCase(logInteraction.fulfilled, (state, action) => {
+      .addCase(logInteraction.fulfilled, () => {
         // Optimistic refresh or wait for next fetch
       })
       .addCase(chatWithAI.pending, (state) => {

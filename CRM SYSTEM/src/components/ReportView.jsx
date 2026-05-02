@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { API_BASE } from '../store';
 
 const ReportView = () => {
   const [report, setReport] = useState(null);
 
   const fetchReport = () => {
-    axios.get('http://localhost:8000/api/reports/summary')
+    axios.get(`${API_BASE}/reports/summary`)
       .then(res => setReport(res.data))
       .catch(err => console.error(err));
   };
