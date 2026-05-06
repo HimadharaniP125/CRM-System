@@ -1,0 +1,11 @@
+{
+  "buildCommand": "npm run build-frontend",
+  "outputDirectory": "CRM SYSTEM/dist",
+  "framework": "vite",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
