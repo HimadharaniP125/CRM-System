@@ -7,6 +7,8 @@
     "install-backend": "cd backend && npm install",
     "start-backend": "cd backend && node server.js",
     "build": "npm run install-frontend && npm run build-frontend",
-    "install": "npm run install-frontend && npm run install-backend"
+    "install": "npm run install-frontend && npm run install-backend",
+    "start": "npm run start-backend",
+    "dev": "cd \"CRM SYSTEM\" && npm run dev"
   }
 }
