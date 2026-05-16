@@ -1,11 +1,12 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { logInteraction, fetchInteractions } from '../store';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { logInteraction, clearError } from '../store';
 import { useNavigate } from 'react-router-dom';
 
 const FormUI = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { loading, error } = useSelector(state => state.crm);
   const [formData, setFormData] = useState({
     doctor_name: '',
     interaction_date: new Date().toISOString().split('T')[0],
@@ -19,16 +20,27 @@ const FormUI = () => {
     product_discussed: ''
   });
 
+  // Clear any stale errors when the form mounts
+  useEffect(() => {
+    dispatch(clearError());
+  }, [dispatch]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await dispatch(logInteraction(formData));
-    dispatch(fetchInteractions());
-    navigate('/');
+    const result = await dispatch(logInteraction(formData));
+    if (result.meta.requestStatus === 'fulfilled') {
+      navigate('/');
+    }
   };
 
   return (
     <div className="card">
       <h3 style={{marginBottom: '1.5rem', opacity: 0.8}}>Interaction Details</h3>
+      {error && (
+        <div style={{background: 'rgba(239,68,68,0.1)', border: '1px solid var(--danger)', borderRadius: '0.75rem', padding: '0.75rem 1rem', marginBottom: '1rem', color: 'var(--danger)', fontSize: '0.9rem'}}>
+          ⚠️ {error}
+        </div>
+      )}
       <form onSubmit={handleSubmit}>
         <div className="form-grid">
           <div className="form-group">
@@ -124,6 +136,16 @@ const FormUI = () => {
         </div>
 
         <div className="form-group">
+          <label>Product Discussed</label>
+          <input 
+            type="text" 
+            value={formData.product_discussed}
+            onChange={(e) => setFormData({...formData, product_discussed: e.target.value})}
+            placeholder="e.g. Cardivax 10mg, OncoCure..."
+          />
+        </div>
+
+        <div className="form-group">
           <label>Follow-up Actions (Next Steps)</label>
           <textarea 
             rows="2"
@@ -133,8 +155,8 @@ const FormUI = () => {
           />
         </div>
 
-        <button type="submit" style={{width: '100%', marginTop: '1rem'}}>
-          Complete Logging
+        <button type="submit" style={{width: '100%', marginTop: '1rem'}} disabled={loading}>
+          {loading ? 'Saving...' : 'Complete Logging'}
         </button>
       </form>
     </div>

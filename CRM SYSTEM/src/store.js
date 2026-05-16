@@ -35,16 +35,40 @@ const crmSlice = createSlice({
   reducers: {
     addMessage: (state, action) => {
       state.chatMessages.push(action.payload);
+    },
+    clearError: (state) => {
+      state.error = null;
     }
   },
   extraReducers: (builder) => {
     builder
+      // fetchInteractions
+      .addCase(fetchInteractions.pending, (state) => {
+        state.error = null;
+      })
       .addCase(fetchInteractions.fulfilled, (state, action) => {
         state.interactions = action.payload;
       })
-      .addCase(logInteraction.fulfilled, () => {
-        // Optimistic refresh or wait for next fetch
+      .addCase(fetchInteractions.rejected, (state, action) => {
+        state.error = action.error.message;
       })
+      // logInteraction
+      .addCase(logInteraction.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(logInteraction.fulfilled, (state, action) => {
+        state.loading = false;
+        // Push the newly saved interaction directly so Dashboard updates instantly
+        if (action.payload && action.payload.id) {
+          state.interactions.unshift(action.payload);
+        }
+      })
+      .addCase(logInteraction.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      })
+      // chatWithAI
       .addCase(chatWithAI.pending, (state) => {
         state.loading = true;
       })
@@ -52,13 +76,24 @@ const crmSlice = createSlice({
         state.loading = false;
         state.chatMessages.push({ role: 'ai', content: action.payload.reply });
       })
+      .addCase(chatWithAI.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      })
+      // deleteInteraction
+      .addCase(deleteInteraction.pending, (state) => {
+        state.error = null;
+      })
       .addCase(deleteInteraction.fulfilled, (state, action) => {
         state.interactions = state.interactions.filter(i => i.id !== action.payload);
+      })
+      .addCase(deleteInteraction.rejected, (state, action) => {
+        state.error = action.error.message;
       });
   }
 });
 
-export const { addMessage } = crmSlice.actions;
+export const { addMessage, clearError } = crmSlice.actions;
 
 export const store = configureStore({
   reducer: {

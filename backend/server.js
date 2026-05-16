@@ -20,8 +20,11 @@ app.post('/api/interactions', (req, res) => {
       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `);
     const info = stmt.run(doctor_name, interaction_date, interaction_time, interaction_type, attendees, notes, sentiment, outcomes, product_discussed, follow_up);
-    res.json({ id: info.lastInsertRowid, message: "Logged successfully" });
+    // Return the full saved row so the frontend can add it to state immediately
+    const newRow = db.prepare('SELECT * FROM interactions WHERE id = ?').get(info.lastInsertRowid);
+    res.json(newRow);
   } catch (err) {
+    console.error("POST /api/interactions error:", err);
     res.status(500).json({ error: err.message });
   }
 });
@@ -32,6 +35,7 @@ app.get('/api/interactions', (req, res) => {
     const rows = db.prepare("SELECT * FROM interactions ORDER BY interaction_date DESC").all();
     res.json(rows);
   } catch (err) {
+    console.error("GET /api/interactions error:", err);
     res.status(500).json({ error: err.message });
   }
 });
@@ -46,6 +50,7 @@ app.put('/api/interactions/:id', (req, res) => {
     db.prepare(`UPDATE interactions SET ${fields} WHERE id = ?`).run(...values, id);
     res.json({ message: "Updated successfully" });
   } catch (err) {
+    console.error("PUT /api/interactions error:", err);
     res.status(500).json({ error: err.message });
   }
 });
@@ -56,6 +61,7 @@ app.delete('/api/interactions/:id', (req, res) => {
     db.prepare("DELETE FROM interactions WHERE id = ?").run(req.params.id);
     res.json({ message: "Deleted successfully" });
   } catch (err) {
+    console.error("DELETE /api/interactions error:", err);
     res.status(500).json({ error: err.message });
   }
 });

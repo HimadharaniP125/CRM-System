@@ -1,22 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap');
 
 :root {
-  --primary: #6366f1;
-  --primary-glow: rgba(99, 102, 241, 0.5);
-  --primary-hover: #4f46e5;
-  --bg-dark: #0f172a;
-  --bg-card: #1e293b;
+  --primary: #d4af37;
+  --primary-glow: rgba(212, 175, 55, 0.4);
+  --primary-hover: #c5a059;
+  --bg-dark: #050508;
+  --bg-card: #0f0f15;
   --text-main: #f8fafc;
   --text-muted: #94a3b8;
-  --accent: #22d3ee;
+  --accent: #ffd700;
+  --accent-bg: rgba(212, 175, 55, 0.1);
+  --accent-border: rgba(212, 175, 55, 0.3);
   --success: #10b981;
   --danger: #ef4444;
-  --border: rgba(255, 255, 255, 0.08);
-  --glass: rgba(30, 41, 59, 0.6);
-  --glass-heavy: rgba(15, 23, 42, 0.8);
+  --border: rgba(212, 175, 55, 0.1);
+  --glass: rgba(15, 15, 21, 0.75);
+  --glass-heavy: rgba(5, 5, 8, 0.9);
   --font-heading: 'Outfit', sans-serif;
   --font-body: 'Inter', sans-serif;
-  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 * {
@@ -52,8 +54,11 @@ body {
 .app-container {
   display: flex;
   min-height: 100vh;
-  background: radial-gradient(circle at top right, rgba(99, 102, 241, 0.15), transparent 40%),
-              radial-gradient(circle at bottom left, rgba(34, 211, 238, 0.1), transparent 40%);
+  background-color: var(--bg-dark);
+  background-image: 
+    radial-gradient(circle at 0% 0%, rgba(212, 175, 55, 0.07) 0%, transparent 50%),
+    radial-gradient(circle at 100% 0%, rgba(139, 92, 246, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.02) 0%, transparent 100%);
 }
 
 /* Sidebar */
@@ -85,10 +90,11 @@ body {
 }
 
 .logo span {
-  background: linear-gradient(135deg, #818cf8 0%, #22d3ee 100%);
+  background: linear-gradient(135deg, #ffd700 0%, #d4af37 50%, #c5a059 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
 }
 
 .logo svg {
@@ -122,10 +128,10 @@ body {
 }
 
 .nav-item.active {
-  background: rgba(99, 102, 241, 0.15);
+  background: rgba(212, 175, 55, 0.1);
   color: var(--primary);
-  border-color: rgba(99, 102, 241, 0.3);
-  box-shadow: inset 0 0 10px rgba(99, 102, 241, 0.1);
+  border-color: rgba(212, 175, 55, 0.3);
+  box-shadow: inset 0 0 15px rgba(212, 175, 55, 0.05);
 }
 
 .nav-item.active svg {
@@ -229,7 +235,7 @@ input, textarea, select {
   transition: var(--transition);
 }
 
-input:focus, textarea:focus {
+input:focus, textarea:focus, select:focus {
   outline: none;
   border-color: var(--primary);
   background: rgba(15, 23, 42, 0.8);
@@ -295,10 +301,11 @@ button:active {
 
 .message.user {
   align-self: flex-end;
-  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
-  color: white;
+  background: linear-gradient(135deg, #d4af37 0%, #c5a059 100%);
+  color: #050508;
+  font-weight: 600;
   border-bottom-right-radius: 0.25rem;
-  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
 }
 
 .message.ai {
@@ -387,11 +394,11 @@ tr:hover td {
   font-weight: 800;
   font-family: var(--font-heading);
   margin: 0.5rem 0;
-  background: linear-gradient(135deg, #ffffff 0%, #94a3b8 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #d4af37 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  color: #ffffff; /* Fallback for browsers that don't support text clipping */
+  color: #ffffff; /* fallback for non-webkit browsers */
 }
 
 /* Mobile Responsiveness */

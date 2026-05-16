@@ -25,9 +25,9 @@ const ReportView = () => {
       </div>
       
       <div className="stats-grid" style={{marginBottom: '3rem'}}>
-        <div className="card stat-card" style={{background: 'rgba(99, 102, 241, 0.1)', border: '1px solid rgba(99, 102, 241, 0.2)'}}>
+        <div className="card stat-card" style={{background: 'rgba(249, 115, 22, 0.1)', border: '1px solid rgba(249, 115, 22, 0.2)'}}>
           <div style={{color: 'var(--text-muted)', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '0.05em'}}>Total Interactions</div>
-          <div className="stat-value" style={{color: '#818cf8'}}>{report.total}</div>
+          <div className="stat-value" style={{background: 'linear-gradient(135deg, #f97316 0%, #fbbf24 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent'}}>{report.total}</div>
         </div>
         <div className="card stat-card" style={{background: 'rgba(34, 211, 238, 0.1)', border: '1px solid rgba(34, 211, 238, 0.2)'}}>
           <div style={{color: 'var(--text-muted)', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '0.05em'}}>Doctors Reached</div>
